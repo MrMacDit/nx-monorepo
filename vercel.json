@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "react-app/package.json",
+      "use": "@vercel/node",
+      "config": {
+        "buildCommand": "nx build react-app --prod",
+        "outputDirectory": "dist/react-app"
+      }
+    },
+    {
+      "src": "angular-app/package.json",
+      "use": "@vercel/node",
+      "config": {
+        "buildCommand": "nx build angular-app --prod",
+        "outputDirectory": "dist/angular-app/browser"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/react-app/(.*)",
+      "dest": "/dist/react-app/$1"
+    },
+    {
+      "src": "/angular-app/(.*)",
+      "dest": "/dist/angular-app/browser/$1"
+    }
+  ]
+}
